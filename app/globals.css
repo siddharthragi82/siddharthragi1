@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Values are RGB channels so Tailwind can add opacity.
+   Palette: deep navy ink, warm off-white surfaces, one accent (electric teal).
+   --------------------------------------------------------------------------- */
+:root {
+  --bg: 247 246 242; /* #F7F6F2 warm off-white */
+  --surface: 255 255 255; /* #FFFFFF */
+  --surface-2: 238 236 229; /* #EEECE5 */
+  --ink: 11 19 36; /* #0B1324 deep navy */
+  --ink-muted: 72 81 104; /* #485168 */
+  --line: 222 219 209; /* #DEDBD1 */
+  --accent: 13 115 106; /* #0D736A teal — AA on light surfaces */
+  --accent-ink: 255 255 255; /* text on accent */
+  --band: 11 19 36; /* always-dark "numbers" band */
+  --band-ink: 240 242 247;
+  --band-muted: 163 173 194;
+  --shadow: 11 19 36;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 8 12 23; /* #080C17 */
+  --surface: 14 21 38; /* #0E1526 */
+  --surface-2: 21 31 54; /* #151F36 */
+  --ink: 236 240 246; /* #ECF0F6 */
+  --ink-muted: 150 162 184; /* #96A2B8 */
+  --line: 33 45 72; /* #212D48 */
+  --accent: 45 212 191; /* #2DD4BF electric teal */
+  --accent-ink: 3 30 27;
+  --band: 15 26 48; /* #0F1A30 */
+  --band-ink: 236 240 246;
+  --band-muted: 150 162 184;
+  --shadow: 0 0 0;
+  color-scheme: dark;
+}
+
+/* Inside the dark band the bright teal is used in both themes. */
+.band {
+  --accent: 45 212 191;
+  --accent-ink: 3 30 27;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: rgb(var(--accent) / 0.25);
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  /* Leave room for the sticky navbar when jumping to a section. */
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@layer components {
+  /* Fluid page container: full width with side gutters, capped at 80rem. */
+  .container {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-inline: 2rem;
+    }
+  }
+  .eyebrow {
+    @apply font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-accent-ink hover:bg-accent/90;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink hover:border-ink/40;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+  .card-hover {
+    @apply transition-[transform,box-shadow,border-color] duration-300 ease-out hover:border-ink/20 hover:shadow-lift motion-safe:hover:-translate-y-1;
+  }
+  .link-underline {
+    @apply underline decoration-line decoration-2 underline-offset-4 transition-colors hover:decoration-accent;
+  }
+}
+
+@layer utilities {
+  /* Fine grid behind the hero, fading out towards the edges. */
+  .bg-grid {
+    background-image: linear-gradient(to right, rgb(var(--line) / 0.7) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--line) / 0.7) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 75%);
+  }
+  .bg-dots {
+    background-image: radial-gradient(rgb(255 255 255 / 0.28) 1px, transparent 1.2px);
+    background-size: 14px 14px;
+  }
+  /* Skip layout/paint for below-the-fold sections until they approach the viewport. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1200px;
+  }
+  /* Set by AnchorScrollFix once someone jumps to a section. */
+  .cv-off .cv-auto {
+    content-visibility: visible;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Honour reduced-motion everywhere, including CSS transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
