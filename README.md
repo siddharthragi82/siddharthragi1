@@ -25,6 +25,9 @@ npm run start        # serve the production build
 npm run lint         # ESLint
 npm run typecheck    # TypeScript only
 ```
+cd C:\Users\CGG\dev-tools\work\site
+git push origin main
+
 
 ## Deploy to Vercel (zero config)
 
