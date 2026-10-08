@@ -31,10 +31,13 @@ git push origin main
 
 ## Deploy to Vercel (zero config)
 
-1. Push this folder to a GitHub repository.
-2. In Vercel, **Add New → Project** and import the repo. Vercel detects Next.js automatically, so keep all defaults.
-3. Add one environment variable: `NEXT_PUBLIC_SITE_URL` = your final URL (e.g. `https://siddharthragi.com`). It's used for canonical links, Open Graph images and the sitemap.
-4. Deploy. Later pushes to `main` redeploy automatically.
+1. cd C:\Users\CGG\dev-tools\work\site
+git pull --rebase origin main
+git push origin main
+2. Push this folder to a GitHub repository.
+3. In Vercel, **Add New → Project** and import the repo. Vercel detects Next.js automatically, so keep all defaults.
+4. Add one environment variable: `NEXT_PUBLIC_SITE_URL` = your final URL (e.g. `https://siddharthragi.com`). It's used for canonical links, Open Graph images and the sitemap.
+5. Deploy. Later pushes to `main` redeploy automatically.
 
 To deploy from the command line instead, run `npx vercel` then `npx vercel --prod`.
 
