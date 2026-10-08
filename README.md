@@ -155,3 +155,7 @@ The form works out of the box by opening the visitor's email app with the messag
 - The work filter is CSS-driven (cards are server-rendered, and a tiny client component only flips a `data-filter` attribute), which keeps hydration cheap. Without JavaScript every card is visible.
 - Lower home-page sections use `content-visibility: auto` for a faster first load. `AnchorScrollFix` switches it off the first time someone follows an in-page link, so smooth scrolling lands exactly on the section.
 - Semantic landmarks, a skip link, one `h1` per page, visible focus rings, `aria-pressed` filters, a live region for filter results, and alt text on every image.
+
+
+cd C:\Users\CGG\dev-tools\work\site
+git push origin main    
