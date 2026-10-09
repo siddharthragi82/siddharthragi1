@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import AnchorScrollFix from "@/components/AnchorScrollFix";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <Footer />
         </Providers>
+        <Analytics />
         {/* If JavaScript is off, show content that would otherwise fade in on scroll. */}
         <noscript>
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
